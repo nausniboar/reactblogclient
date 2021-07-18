@@ -1,6 +1,6 @@
 [[redirects]]
-  from = "/*"
-  to = "/index.html"
+  from = "/api/*"
+  to = "https://jdrworld.herokuapp.com/api/*"
   status = 200
 
 [[headers]]
