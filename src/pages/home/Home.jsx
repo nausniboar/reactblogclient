@@ -17,6 +17,7 @@ export default function Home() {
     // referring to the proxy + the given path, so http://localhost:5000/api/posts
     useEffect(()=>{
         const fetchPosts = async ()=>{
+            console.log("HELLO");
             axios.interceptors.request.use(request => {
                 console.log('Starting Request', JSON.stringify(request, null, 2))
                 return request
