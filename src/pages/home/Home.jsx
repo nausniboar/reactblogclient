@@ -17,6 +17,7 @@ export default function Home() {
     // referring to the proxy + the given path, so http://localhost:5000/api/posts
     useEffect(()=>{
         const fetchPosts = async ()=>{
+            require('axios-debug-log')
             const res = await axios.get("/posts"+search) 
             setPosts(res.data);
         }
