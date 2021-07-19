@@ -9,7 +9,8 @@ export default function TopBar() {
     const {user, dispatch} = useContext(Context);
 
     // getting the location of our public folder, so we can display the user's profile picture
-    const PF = "http://localhost:5000/images/";
+    // note: disabled this once we started using cloudinary
+    //const PF = "http://localhost:5000/images/";
     
     // function for handling user logout, done by setting the user object to null via dispatching
     // to our context
@@ -65,7 +66,9 @@ export default function TopBar() {
                                 </text>
                             </svg>
                         ) : (
-                            <img className="topImg" src={PF + user.profilePic} alt="" />
+                            // commenting out this line since we're just using the photo's url on its own
+                            //<img className="topImg" src={PF + user.profilePic} alt="" />
+                            <img className="topImg" src={user.profilePic} alt="" />
                         )}
                     </Link>
                 ) : (

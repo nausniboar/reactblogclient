@@ -3,7 +3,8 @@ import { Link } from "react-router-dom"
 
 export default function Post({post}) {
     // declaring a public folder location to display images from
-    const PF = "http://localhost:5000/images/";
+    // note: disabled this once we started using cloudinary
+    // const PF = "http://localhost:5000/images/";
     return (
         <div className="post">
             {
@@ -12,7 +13,9 @@ export default function Post({post}) {
             post.photo && (
                 <img
                     className="postImg"
-                    src = {PF + post.photo}
+                    // commenting out this line since we're just using the photo's url on its own
+                    // src = {PF + post.photo}
+                    src = {post.photo}
                     alt=""
                 />
             )}

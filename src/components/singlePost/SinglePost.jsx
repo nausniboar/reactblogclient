@@ -14,7 +14,8 @@ export default function SinglePost() {
     // sent by setPost to the variable post
     const [post, setPost] = useState({});
     // our public folder of images; will display this post's image with it
-    const PF = "http://localhost:5000/images/";
+    // note: disabled this once we started using cloudinary
+    //const PF = "http://localhost:5000/images/";
     // get the user data from our context
     const { user, dispatch } = useContext(Context);
 
@@ -89,7 +90,9 @@ export default function SinglePost() {
                 {post.photo && (
                     <img
                         className="singlePostImg" 
-                        src={PF + post.photo}
+                        // commenting out this line since we're just using the photo's url on its own
+                        //src={PF + post.photo}
+                        src = {post.photo}
                         alt=""
                     />
                 )}

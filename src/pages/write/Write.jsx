@@ -25,19 +25,41 @@ export default function Write() {
         if(file) {
             // create new form ordered by key/value for sending the image
             const data = new FormData();
+            // add the file under the "file" key to our data
+            data.append("file", file)
             // create filename string by combining current date printout and the name of the
             // uploaded file
             const filename = Date.now() + file.name;
+            /* like in settings.jsx, disabling this because cloudinary's api works differently
             // add the filename under the "name" key to our data
             data.append("name", filename)
-            // add the file under the "file" key to our data
-            data.append("file", file)
             // set the "photo" field of our post to our filename
             newPost.photo = filename;
             // try to upload our file
             try {
                 await axios.post("/api/upload", data);
-            } catch (err){}
+            } catch (err){}*/
+
+            // cloudinary requires that we know the name of a specific upload preset to securely
+            // upload to cloudinary's api endpoint; including that here
+            data.append("upload_preset", "v6hf50m5");
+            // setting the cloudinary id of the post to the filename we generated
+            data.append("public_id", filename);
+            // putting the image inside our profilePics folder in cloudinary's storage
+            data.append("folder", "postImages/");
+            try {
+                // posting to cloudinary using our cloud name and upload type
+                const res = await axios.post("https://api.cloudinary.com/v1_1/beanboy/image/upload", data);
+                console.log("WRITE: POSTED TO CLOUDINARY");
+                console.log(res);
+                console.log(res.data);
+                console.log(res.data.secure_url);
+                updatedUser.profilePic = res.data.secure_url;
+            } catch(err) {
+                console.log("WRITE: GOT AN ERROR");
+                console.log(err);
+            }
+
         }
         try {
             // create response object, call our api's /posts route, and fill object with returned data

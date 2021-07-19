@@ -16,7 +16,8 @@ export default function Settings() {
     const {user, dispatch} = useContext(Context);
 
     // getting the location of our public folder, so we can display the user's profile picture
-    const PF = "http://localhost:5000/images/";
+    // note: disabled this once we started using cloudinary
+    //const PF = "http://localhost:5000/images/";
 
     const handleSubmit = async (e)=>{
         // do nothing if nothing is entered
@@ -55,17 +56,17 @@ export default function Settings() {
             // setting the cloudinary id of the post to the filename we generated
             data.append("public_id", filename);
             // putting the image inside our profilePics folder in cloudinary's storage
-            data.append("folder", "/profilePics");
+            data.append("folder", "profilePics/");
             try {
                 // posting to cloudinary using our cloud name and upload type
                 const res = await axios.post("https://api.cloudinary.com/v1_1/beanboy/image/upload", data);
-                console.log("POSTED TO CLOUDINARY");
+                console.log("SETTINGS: POSTED TO CLOUDINARY");
                 console.log(res);
                 console.log(res.data);
                 console.log(res.data.secure_url);
                 updatedUser.profilePic = res.data.secure_url;
             } catch(err) {
-                console.log("GOT AN ERROR");
+                console.log("SETTINGS: GOT AN ERROR");
                 console.log(err);
             }
         }
@@ -113,7 +114,9 @@ export default function Settings() {
                                     </text>
                                 </svg>
                             ) : (
-                                <img src={PF + user.profilePic} alt=""/>
+                                // commenting out this line since we're just using the photo's url on its own
+                                //<img src={PF + user.profilePic} alt=""/>
+                                <img src={user.profilePic} alt=""/>
                             )
                         )}
                         <label htmlFor="fileInput">
