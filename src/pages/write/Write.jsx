@@ -54,7 +54,7 @@ export default function Write() {
                 console.log(res);
                 console.log(res.data);
                 console.log(res.data.secure_url);
-                updatedUser.profilePic = res.data.secure_url;
+                newPost.photo = res.data.secure_url;
             } catch(err) {
                 console.log("WRITE: GOT AN ERROR");
                 console.log(err);
