@@ -7,6 +7,8 @@ export default function Post({post}) {
     // const PF = "http://localhost:5000/images/";
     return (
         <div className="post">
+            {/* added this so that clicking on the image will also link you to the post */}
+            <Link to={`/post/${post._id}`} className="link">
             {
             // cheeky conditional usage: using post object passed in by Posts.jsx, create a
             // postImg div only if post.photo exists
@@ -26,6 +28,7 @@ export default function Post({post}) {
                     alt=""
                 />
             )}
+            </Link>
             <div className="postInfo">
                 <div className="postCats">
                     {post.categories.map((c)=> (
@@ -42,9 +45,11 @@ export default function Post({post}) {
                 <hr/>
                 <span className="postDate">{new Date(post.createdAt).toDateString()}</span>
             </div>
+            {/* commenting this because I think just the title + image looks better
             <p className="postDesc">
                 {post.desc}
-            </p>
+                </p>
+            */}
         </div>
     )
 }

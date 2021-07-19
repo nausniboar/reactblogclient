@@ -4,6 +4,7 @@ import "./posts.css"
 export default function Posts({posts}) {
     return (
         <div className="posts">
+        Hi costco :) Site still under construction
             {
             // using map function, which is an array function, to break variable posts into
             // individual pieces (p), and then create a post inside Posts.jsx for each entry
@@ -12,7 +13,6 @@ export default function Posts({posts}) {
             posts.map((p)=> (
                 <Post post={p}/>
             ))}
-            Hi costco :) Site still under construction
         </div>
     );
 }
