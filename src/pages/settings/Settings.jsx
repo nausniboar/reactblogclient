@@ -45,13 +45,13 @@ export default function Settings() {
             updatedUser.profilePic = filename;
             // try to upload our file, through multer's /upload path in our api
             try {
-                await axios.post("/upload", data);
+                await axios.post("/api/upload", data);
             } catch (err){}
         }
         try {
             // not going to create response object like in Write.jsx; simply just going to put
             // our new user information to the api
-            const res = await axios.put("users/" + user._id, updatedUser);
+            const res = await axios.put("/api/users/" + user._id, updatedUser);
             // since the axios.post would have tripped the try/catch statement upon not
             // working, we call setSuccess with true to set our success boolean true and
             // display the success text at the bottom

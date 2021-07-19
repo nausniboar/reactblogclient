@@ -36,12 +36,12 @@ export default function Write() {
             newPost.photo = filename;
             // try to upload our file
             try {
-                await axios.post("/upload", data);
+                await axios.post("/api/upload", data);
             } catch (err){}
         }
         try {
             // create response object, call our api's /posts route, and fill object with returned data
-            const res = await axios.post("/posts", newPost);
+            const res = await axios.post("/api/posts", newPost);
             // change the URL to post page, passing in the id we just got from the api call
             window.location.replace("/post/" + res.data._id);
         } catch(err){

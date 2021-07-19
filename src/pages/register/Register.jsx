@@ -21,7 +21,7 @@ export default function Register() {
         setError(false);
         try {
             // we call our auth.js register function with the given username, email and password
-            const res = await axios.post("/auth/register", {
+            const res = await axios.post("/api/auth/register", {
                 username,
                 email,
                 password

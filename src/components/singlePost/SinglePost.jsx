@@ -34,7 +34,7 @@ export default function SinglePost() {
             var userFromId;
             // try/catch block, see if the given id is even valid at all
             try {
-                userFromId = await axios.get("/users/"+user._id);
+                userFromId = await axios.get("/api/users/"+user._id);
             } catch(err){}
             if(!userFromId) {
                 dispatch({type: "LOGOUT"});
@@ -50,7 +50,7 @@ export default function SinglePost() {
     useEffect(()=> {
         const getPost = async ()=>{
             // get the post data from our api through posts.js's get function; 
-            const res = await axios.get("/posts/"+path)
+            const res = await axios.get("/api/posts/"+path)
             setPost(res.data);
             setTitle(res.data.title);
             setDesc(res.data.desc);
@@ -63,7 +63,7 @@ export default function SinglePost() {
         try {
             // call the delete function in our api under posts.js to remove the current post
             // from the database; passing it the username from the context
-            await axios.delete("/posts/" + path, {
+            await axios.delete("/api/posts/" + path, {
                 data:{username:user.username}
             });
             // go back to the homepage
@@ -75,7 +75,7 @@ export default function SinglePost() {
     const handleUpdate = async()=>{
         try {
             // updating post via our api by calling put function in posts.js with our username
-            await axios.put("/posts/" + path, {username:user.username, title:title, desc:desc});
+            await axios.put("/api/posts/" + path, {username:user.username, title:title, desc:desc});
             // 
             setUpdateMode(false);
         } catch(err){}
