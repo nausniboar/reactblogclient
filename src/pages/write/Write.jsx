@@ -45,8 +45,6 @@ export default function Write() {
             data.append("upload_preset", "v6hf50m5");
             // setting the cloudinary id of the post to the filename we generated
             data.append("public_id", "postImages/" + filename);
-            // putting the image inside our profilePics folder in cloudinary's storage
-            data.append("folder", "postImages/");
             try {
                 // posting to cloudinary using our cloud name and upload type
                 const res = await axios.post("https://api.cloudinary.com/v1_1/beanboy/image/upload", data);
