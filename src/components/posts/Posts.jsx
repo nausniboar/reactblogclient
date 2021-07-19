@@ -3,8 +3,6 @@ import "./posts.css"
 
 export default function Posts({posts}) {
     return (
-        <>
-        <div>Hi costco :) Site still under construction</div>
         <div className="posts">
             {
             // using map function, which is an array function, to break variable posts into
@@ -14,7 +12,7 @@ export default function Posts({posts}) {
             posts.map((p)=> (
                 <Post post={p}/>
             ))}
+            Hi costco :) Site still under construction
         </div>
-        </>
     );
 }
