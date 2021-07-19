@@ -10,6 +10,11 @@ export default function Sidebar() {
     useEffect(()=> {
         const getCats = async ()=>
         {
+            console.log("SIDEBAR INTERCEPTOR");
+            axios.interceptors.request.use(request => {
+                console.log('Starting Request', JSON.stringify(request, null, 2))
+                return request
+            })
             const res = await axios.get("/categories");
             setCats(res.data);
         };
