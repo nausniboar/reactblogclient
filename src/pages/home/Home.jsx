@@ -22,7 +22,7 @@ export default function Home() {
                 console.log('Starting Request', JSON.stringify(request, null, 2))
                 return request
             })
-            const res = await axios.get("/posts"+search) 
+            const res = await axios.get("https://jdrworld.herokuapp.com/api/posts"+search) 
             setPosts(res.data);
         }
         fetchPosts();
