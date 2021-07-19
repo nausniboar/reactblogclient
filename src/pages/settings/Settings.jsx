@@ -48,11 +48,16 @@ export default function Settings() {
             try {
                 await axios.post("/api/upload", data);
             } catch (err){}*/
+
+            // cloudinary requires that we know the name of a specific upload preset to securely
+            // upload to cloudinary's api endpoint; including that here
+            data.append("upload_preset", "v6hf50m5");
             // setting the cloudinary id of the post to the filename we generated
             data.append("public_id", filename);
             // putting the image inside our profilePics folder in cloudinary's storage
             data.append("folder", "/profilePics");
             try {
+                // posting to cloudinary using our cloud name and upload type
                 res = await axios.post("https://api.cloudinary.com/v1_1/beanboy/image/upload", formData);
                 console.log("POSTED TO CLOUDINARY");
                 console.log(res);
