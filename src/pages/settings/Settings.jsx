@@ -34,19 +34,35 @@ export default function Settings() {
         if(file) {
             // create new form ordered by key/value for sending the profile pic
             const data = new FormData();
+            // add the file under the "file" key to our data
+            data.append("file", file)
             // create filename string by combining current date printout and the name of the
             // uploaded file
             const filename = Date.now() + file.name;
+            /* not using these commands because Cloudinary's api needs to be handled differently
             // add the filename under the "name" key to our data
             data.append("name", filename)
-            // add the file under the "file" key to our data
-            data.append("file", file)
             // set the "profilePic" field of our new user object to our filename
             updatedUser.profilePic = filename;
             // try to upload our file, through multer's /upload path in our api
             try {
                 await axios.post("/api/upload", data);
-            } catch (err){}
+            } catch (err){}*/
+            // setting the cloudinary id of the post to the filename we generated
+            data.append("public_id", filename);
+            // putting the image inside our profilePics folder in cloudinary's storage
+            data.append("folder", "/profilePics");
+            try {
+                res = await axios.post("https://api.cloudinary.com/v1_1/beanboy/image/upload", formData);
+                console.log("POSTED TO CLOUDINARY");
+                console.log(res);
+                console.log(res.data);
+                console.log(res.data.secure_url);
+                updatedUser.profilePic = res.data.secure_url;
+            } catch(err) {
+                console.log("GOT AN ERROR");
+                console.log(err);
+            }
         }
         try {
             // not going to create response object like in Write.jsx; simply just going to put
@@ -76,6 +92,9 @@ export default function Settings() {
                 <form className="settingsForm" onSubmit={handleSubmit}>
                     <label>Profile picture</label>
                     <div className="settingsPP">
+                        {/* if we've uploaded a file, then use the URL javascript interface to
+                            create an object url for the file, and display it; if not, just
+                            display current profile pic */}
                         {file ? (
                             <img src={URL.createObjectURL(file)} alt=""/>
                         ) : (
@@ -92,10 +111,6 @@ export default function Settings() {
                                 <img src={PF + user.profilePic} alt=""/>
                             )
                         )}
-                        {/* if we've uploaded a file, then use the URL javascript interface to
-                            create an object url for the file, and display it; if not, just
-                            display current profile pic */}
-                        
                         <label htmlFor="fileInput">
                             <i className="settingsPPIcon far fa-user-circle"></i>
                         </label>
