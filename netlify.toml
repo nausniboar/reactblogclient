@@ -2,7 +2,3 @@
   from = "/api/*"
   to = "https://jdrworld.herokuapp.com/api/:splat"
   status = 200
-
-[[headers]]
-    [headers.values]
-    Access-Control-Allow-Origin = "*"
