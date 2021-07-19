@@ -58,7 +58,7 @@ export default function Settings() {
             data.append("folder", "/profilePics");
             try {
                 // posting to cloudinary using our cloud name and upload type
-                res = await axios.post("https://api.cloudinary.com/v1_1/beanboy/image/upload", formData);
+                const res = await axios.post("https://api.cloudinary.com/v1_1/beanboy/image/upload", data);
                 console.log("POSTED TO CLOUDINARY");
                 console.log(res);
                 console.log(res.data);
