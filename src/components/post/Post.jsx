@@ -10,12 +10,19 @@ export default function Post({post}) {
             {
             // cheeky conditional usage: using post object passed in by Posts.jsx, create a
             // postImg div only if post.photo exists
-            post.photo && (
+            post.photo ? (
                 <img
                     className="postImg"
                     // commenting out this line since we're just using the photo's url on its own
                     // src = {PF + post.photo}
                     src = {post.photo}
+                    alt=""
+                />
+            ) : (
+                <img
+                    className="postImg"
+                    // if no photo exists, use our placeholder image instead
+                    src = "https://res.cloudinary.com/beanboy/image/upload/v1626718138/reactblog/post_image_placeholder_vytptl.jpg"
                     alt=""
                 />
             )}
