@@ -30,20 +30,17 @@ export default function SinglePost() {
     // userId is valid, we can update the username in the locally stored data via dispatching a
     // login_success action to the one we get back from calling getUser
     useEffect(()=> {
-        const refreshUserData = async ()=> {
-            // declare variable for user we get back from api
-            var userFromId;
-            // try/catch block, see if the given id is even valid at all
-            try {
-                userFromId = await axios.get("/api/users/"+user._id);
-            } catch(err){}
-            if(!userFromId) {
-                dispatch({type: "LOGOUT"});
-            } else {
-                dispatch({type:"LOGIN_SUCCESS", payload: userFromId.data});
-            }
+        // declare variable for user we get back from api
+        var userFromId;
+        // try/catch block, see if the given id is even valid at all
+        try {
+            userFromId = await axios.get("/api/users/"+user._id);
+        } catch(err){}
+        if(!userFromId) {
+            dispatch({type: "LOGOUT"});
+        } else {
+            dispatch({type:"LOGIN_SUCCESS", payload: userFromId.data});
         };
-        refreshUserData();
     });
 
     // again, not sure exactly what useEffect is, but the statement calls the api with the
